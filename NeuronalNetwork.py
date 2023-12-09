@@ -7,6 +7,7 @@ class NeuronalNetwork:
         self.weights = []
         self.biases = []
         self.a = self.activation
+        self.shapes = shapes
 
         for idx in range(len(shapes) - 1):
             self.layers.append(np.zeros((shapes[idx], 1)))
@@ -24,3 +25,12 @@ class NeuronalNetwork:
 
     def activation(self, vector_x):
         return 1 / (1 + np.exp(-vector_x))
+
+    def copy(self):
+        cloned_Brain = NeuronalNetwork(self.shapes)
+        cloned_Brain.layers = self.layers.copy()
+        cloned_Brain.weights = self.weights.copy()
+        cloned_Brain.biases = self.biases.copy()
+        cloned_Brain.a = self.activation
+        cloned_Brain.shapes = self.shapes.copy()
+        return cloned_Brain

@@ -1,9 +1,8 @@
 from NeuronalNetwork import NeuronalNetwork as nn
 
-
 class Agent:
     def __init__(self):
-        self.brain = nn([8, 7, 4])
+        self.brain = nn([8, 4])
         self.dna = self.brain.weights
         self.reward = 0
 
@@ -12,3 +11,9 @@ class Agent:
 
     def __str__(self):
         return str(self.reward)
+
+    def clone(self):
+        child = Agent()
+        child.brain = self.brain.copy()
+        child.dna = child.brain.weights
+        return child
