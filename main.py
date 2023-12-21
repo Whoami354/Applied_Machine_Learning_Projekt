@@ -4,10 +4,9 @@ from GeneticAlgorithm import GA
 import numpy as np
 
 env = gym.make("LunarLander-v2")
-
 ga = GA()
-while True:
 
+while True:
     for idx in range(ga.population_size):
         agent = ga.population[idx]
         observation, info = env.reset()

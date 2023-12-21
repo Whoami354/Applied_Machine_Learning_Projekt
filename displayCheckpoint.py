@@ -21,7 +21,6 @@ with open("checkpoint.pickle", "rb") as file:
     population_size = len(population)
 
 while True:
-
     for idx in range(population_size):
         agent = population[idx]
         observation, info = env.reset()
