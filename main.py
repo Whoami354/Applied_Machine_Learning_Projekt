@@ -20,5 +20,8 @@ while True:
                 break
     ga.reproduce_crossover()
     ga.checkpoint()
+    ga.force_rewards()
+    if ga.stop:
+        break
 
 env.close()

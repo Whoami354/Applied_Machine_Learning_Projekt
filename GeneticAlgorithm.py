@@ -6,11 +6,13 @@ import numpy as np
 
 class GA:
     def __init__(self):
+        self.Goal = 150
         self.mutation_rate = 0.09
         self.population = []
+        self.average_reward = []
         self.generation_number = 0
-
-        self.population_size = 700
+        self.stop = False
+        self.population_size = 1200
 
         for idx in range(self.population_size):
             self.population.append(ag())
@@ -48,8 +50,7 @@ class GA:
         print(self.generation_number)
         sorted_agents = sorted(self.population, key=lambda x: x.reward, reverse=True)
         # Die besten 20%:
-        rewards = sum(map(lambda agent: agent.reward, sorted_agents))
-        print("rewards:", rewards / len(self.population))
+        self.get_rewards(self.Goal)
         n = int(len(sorted_agents) * 0.1)
         top_20 = sorted_agents[:n]
         new_population = []
@@ -62,6 +63,19 @@ class GA:
         self.population = new_population
         self.generation_number += 1
 
+    def get_rewards(self, threshold):
+        rewards = sum(map(lambda agent: agent.reward, self.population))
+        average_reward = rewards / len(self.population)
+        self.average_reward.append(average_reward)
+        if average_reward > threshold:
+            self.stop = True
+            self.force_rewards()
+        print("rewards:", self.average_reward[-1])
+
+    def force_rewards(self):
+        with open("rewards.txt", "w") as file:
+            for line in self.average_reward:
+                file.write(str(line) + "\n")
 
     def crossover(self, candidate1, candidate2):
         child = ag()

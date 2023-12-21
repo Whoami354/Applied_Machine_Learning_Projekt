@@ -2,12 +2,13 @@ from NeuronalNetwork import NeuronalNetwork as nn
 
 class Agent:
     def __init__(self):
+        # jeder Agent hat Gehirn, um entscheidungen zu treffen, basierend auf den Observations (was er beobachtet)
         self.brain = nn([8, 4])
-        self.dna = self.brain.weights
+        # das ist die Belohnung, was man gibt, wenn er die Arbeit gut gemacht hat.
         self.reward = 0
 
     def fuehre_aktion(self, input_vector):
-        return self.brain.feet_forward(input_vector)
+        return self.brain.feed_forward(input_vector)
 
     def __str__(self):
         return str(self.reward)
@@ -15,5 +16,4 @@ class Agent:
     def clone(self):
         child = Agent()
         child.brain = self.brain.copy()
-        child.dna = child.brain.weights
         return child

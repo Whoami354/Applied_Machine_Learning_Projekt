@@ -3,6 +3,15 @@ import pickle
 import gymnasium as gym
 from Agent import Agent
 import numpy as np
+import matplotlib.pyplot as plt
+with open("rewards.txt", "r") as reward_file:
+    rewards = reward_file.readlines()
+    y_values = []
+    for reward in rewards:
+        y_values.append(np.round(float(reward), decimals=3))
+    x_values = range(len(rewards))
+    plt.plot(x_values, y_values, "-")
+    plt.show()
 
 env = gym.make("LunarLander-v2", render_mode='human')
 
