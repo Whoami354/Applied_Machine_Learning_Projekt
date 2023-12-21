@@ -4,6 +4,7 @@ import gymnasium as gym
 from Agent import Agent
 import numpy as np
 import matplotlib.pyplot as plt
+
 with open("rewards.txt", "r") as reward_file:
     rewards = reward_file.readlines()
     y_values = []

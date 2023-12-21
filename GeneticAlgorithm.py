@@ -7,7 +7,7 @@ import numpy as np
 class GA:
     def __init__(self):
         self.Goal = 150
-        self.mutation_rate = 0.09
+        self.mutation_rate = 0.10
         self.population = []
         self.average_reward = []
         self.generation_number = 0
