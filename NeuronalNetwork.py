@@ -1,6 +1,6 @@
 import numpy as np
 
-# Neuronales Netz ist Simulation von Biologischem Gehirn
+# Neuronales Netz ist Simulation von Biologischen Gehirn
 class NeuronalNetwork:
     def __init__(self, shapes):
         # schichten vom neuronalen netzwerk
