@@ -1,7 +1,6 @@
 import pickle
 
 import gymnasium as gym
-from Agent import Agent
 import numpy as np
 import matplotlib.pyplot as plt
 

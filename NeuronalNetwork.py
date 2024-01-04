@@ -3,6 +3,9 @@ import numpy as np
 # Neuronales Netz ist Simulation von Biologischen Gehirn
 class NeuronalNetwork:
     def __init__(self, shapes):
+        """
+        :param shapes: A list of integers representing the number of neurons in each layer of the neural network.
+        """
         # schichten vom neuronalen netzwerk
         self.layers = []
         # die Verbindungen (synapsen) zwischen den layers
@@ -21,7 +24,15 @@ class NeuronalNetwork:
             self.weights.append(np.random.rand(shapes[(idx + 1)], shapes[idx]))
 
     def feed_forward(self, input_vector):
-        """Weiterleitung zwischen den Synapsen durch neuronales Netzwerk"""
+        """
+            Performs a feed-forward computation in the neural network.
+
+            :param input_vector: The input vector to be fed into the network.
+            :type input_vector: numpy.ndarray
+
+            :return: The output vector computed by the network.
+            :rtype: numpy.ndarray
+        """
         # Wir multiplizieren Vectoren mit Matrizen
         # Kopiert unseren input vector in unseren Layer rein.
         self.layers[0] = input_vector
