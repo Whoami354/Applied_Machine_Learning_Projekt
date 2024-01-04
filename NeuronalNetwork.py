@@ -7,12 +7,25 @@ class NeuronalNetwork:
         :param shapes: A list of integers representing the number of neurons in each layer of the neural network.
         """
         # schichten vom neuronalen netzwerk
-        self.layers = []
+        self.layers = [] #eine Liste von Vektoren (eine Schicht wird von einem Vektor repräsentiert)
         # die Verbindungen (synapsen) zwischen den layers
-        self.weights = []
+        self.weights = [] #eine Liste von Matrizen (Gewichte pro Schicht werden von einer Matrix repräsentiert)
         # Vorstellung der aktivierung von den Neuronen
         self.a = self.activation
         # der Aufbau des Gehirns
+        """
+        Input Schicht hat 8 Neuronen:
+        1) x-Position von Agent
+        2) y-Position von Agent
+        3) x-Geschwindigkeit von Agent
+        4) y-Geschwindigkeit von Agent
+        5) Rotationswinkel von Agent
+        6) Rotationsgeschwindigkeit von Agent
+        7) linkes Bein in Kontakt mit Boden (Wahr oder Falsch / 0 oder 1)
+        8) rechtes Bein in Kontakt mit Boden (Wahr oder Falsch / 0 oder 1)
+        
+        Output Schicht hat 4 Neuronen: Ein Neuron pro Triebwerk
+        """
         self.shapes = shapes
 
         for idx in range(len(shapes) - 1):

@@ -6,14 +6,19 @@ import numpy as np
 
 class GA:
     def __init__(self):
+        # Abbruchbedingung
         self.Goal = 150
+        # Mutationswahrscheinlichkeit
         self.mutation_rate = 0.10
+        # Bevölkerung
         self.population = []
+        #Liste der durchschn. Belohnungen
         self.average_reward = []
         self.generation_number = 0
         self.stop = False
+        #Bevölkerungsgröße
         self.population_size = 1200
-
+        #Initialisierung der Anfangsbevölkerung
         for idx in range(self.population_size):
             self.population.append(ag())
 
@@ -49,12 +54,14 @@ class GA:
     def reproduce_crossover(self):
         print(self.generation_number)
         sorted_agents = sorted(self.population, key=lambda x: x.reward, reverse=True)
-        # Die besten 20%:
+        # Die besten 10%:
         self.get_rewards(self.Goal)
+        # Was sind die ersten 10% (wie viele Agenten wollen wir)
         n = int(len(sorted_agents) * 0.1)
         top_20 = sorted_agents[:n]
         new_population = []
         for idx in range(self.population_size):
+            #Wir wählen aus den besten 2 Kandidaten un pflanzen diese miteinander fort
             candidate1 = top_20[random.randrange(n)]
             candidate2 = top_20[random.randrange(n)]
             child = self.crossover(candidate1, candidate2)
@@ -67,6 +74,7 @@ class GA:
         rewards = sum(map(lambda agent: agent.reward, self.population))
         average_reward = rewards / len(self.population)
         self.average_reward.append(average_reward)
+        #Abbruchbedingung überprüfen
         if average_reward > threshold:
             self.stop = True
             self.force_rewards()

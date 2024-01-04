@@ -1,5 +1,4 @@
 import gymnasium as gym
-from Agent import Agent
 from GeneticAlgorithm import GA
 import numpy as np
 
