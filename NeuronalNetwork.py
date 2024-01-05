@@ -51,7 +51,7 @@ class NeuronalNetwork:
         self.layers[0] = input_vector
         for idx in range(1, len(self.layers)):
             # wir gehen durch die einzelnen schichten durch und multiplizieren die
-            #vorangegagen schichten mit den vorangegangenen weights
+            # vorangegagen schichten mit den vorangegangenen weights
             # weights = Matrix layers = Vector
             # @ ist von numpy wie man matrizen multipliziert.
             self.layers[idx] = self.weights[idx - 1] @ self.layers[idx - 1]
