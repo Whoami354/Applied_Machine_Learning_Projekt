@@ -24,12 +24,18 @@ with open("checkpoint.pickle", "rb") as file:
 # Startet die Haupt-Simulationschleife
 while True:
     for idx in range(population_size):
-        agent = population[idx]  # Wählt den aktuellen Agenten
-        observation, info = env.reset()  # Setzt die Umgebung zurück und erhält die erste Beobachtung
-        for _ in range(1000):  # Simuliert bis zu 1000 Schritte
-            action = np.argmax(agent.fuehre_aktion(observation))  # Bestimmt die Aktion basierend auf der Agentenrichtlinie
-            observation, reward, terminated, truncated, info = env.step(action)  # Führt die Aktion aus und erhält neue Zustände
-            agent.reward = reward  # Aktualisiert die Belohnung des Agenten
+        # Auswählen des aktuellen Agenten aus der Population
+        agent = population[idx]
+        # Setzt die Umgebung zurück und erhält die erste Beobachtung
+        observation, info = env.reset()
+        # Simuliert bis zu 1000 Schritte
+        for _ in range(1000):
+            # Bestimmt die Aktion basierend auf der Agentenrichtlinie
+            action = np.argmax(agent.fuehre_aktion(observation))
+            # Führt die Aktion aus und erhält neue Zustände
+            observation, reward, terminated, truncated, info = env.step(action)
+            # Aktualisiert die Belohnung des Agenten
+            agent.reward = reward
             # Beendet die Episode, wenn das Spiel vorbei ist
             if terminated or truncated:
                 break

@@ -2,15 +2,13 @@ import gymnasium as gym
 from GeneticAlgorithm import GA
 import numpy as np
 
-# Erstellen einer neuen Umgebung für das LunarLander-v2 Spiel
 env = gym.make("LunarLander-v2")
-# Initialisieren des genetischen Algorithmus
 ga = GA()
 # Starten einer Endlosschleife für das Training
 while True:
     # Durchlaufen der gesamten Population der Agenten
     for idx in range(ga.population_size):
-        # Auswählen eines Agenten aus der Population
+        # Auswählen des aktuellen Agenten aus der Population
         agent = ga.population[idx]
         # Zurücksetzen der Umgebung zu Beginn jeder Episode und erhalten der Anfangsbeobachtung
         observation, info = env.reset()
