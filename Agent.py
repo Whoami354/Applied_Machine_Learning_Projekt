@@ -12,8 +12,7 @@ class Agent:
         return self.brain.feed_forward(input_vector)  # Führt die Vorwärtspropagierung im neuronalen Netzwerk aus
 
     def __str__(self):
-        # Spezielle Methode, die definiert, wie der Agent als String dargestellt wird
-        return str(self.reward)  # Gibt die Belohnung des Agenten als String zurück
+        return str(self.reward)
 
     def clone(self):
         # Methode, um eine Kopie dieses Agenten zu erstellen
