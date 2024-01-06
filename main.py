@@ -14,7 +14,7 @@ while True:
         agent = ga.population[idx]
         # Zurücksetzen der Umgebung zu Beginn jeder Episode und erhalten der Anfangsbeobachtung
         observation, info = env.reset()
-        # Durchführen von bis zu 1000 Schritten (Aktionen) in der Umgebung
+        # Durchführen von bis zu 1000 Schritten
         for _ in range(1000):
             # Auswahl der Aktion basierend auf den Beobachtungen und der Strategie des Agenten
             action = np.argmax(agent.fuehre_aktion(observation))
@@ -27,9 +27,9 @@ while True:
                 break
     # Anwenden des genetischen Algorithmus, um die nächste Generation zu erzeugen
     ga.reproduce_crossover()
-    # Speichern eines Checkpoints, wahrscheinlich um den Fortschritt zu speichern
+    # Speichern eines Checkpoints, um den Fortschritt zu speichern
     ga.checkpoint()
-    # Erzwingen der Belohnungen, vielleicht um sicherzustellen, dass alle Belohnungen berücksichtigt werden
+    # Erzwingen der Belohnungen, um sicherzustellen, dass alle Belohnungen berücksichtigt werden
     ga.force_rewards()
     # Überprüfen, ob das Trainingskriterium erreicht ist und das Training beenden, wenn ja
     if ga.stop:

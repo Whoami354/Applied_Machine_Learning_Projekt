@@ -1,21 +1,25 @@
-from NeuronalNetwork import NeuronalNetwork as nn  # Importiert die NeuronalNetwork-Klasse
+from NeuronalNetwork import NeuronalNetwork as nn
 
 # Definition der Klasse Agent
 class Agent:
     def __init__(self):
-        # Initialisierungsmethode für einen neuen Agenten
-        self.brain = nn([8, 4])  # Erstellt ein neuronales Netzwerk mit 8 Eingangsneuronen und 4 Ausgangsneuronen
-        self.reward = 0  # Initialisiert die Belohnung des Agenten mit 0
+        # Das neuronale Netzwerk hat 8 Eingabeneuronen und 4 Ausgabeneuronen
+        self.brain = nn([8, 4])
+        # Belohnung wird als Wert für die Leistung verwendet
+        self.reward = 0
 
     def fuehre_aktion(self, input_vector):
-        # Methode, um das neuronale Netzwerk des Agenten eine Aktion ausführen zu lassen basierend auf einem Eingabevektor
-        return self.brain.feed_forward(input_vector)  # Führt die Vorwärtspropagierung im neuronalen Netzwerk aus
+        # Methode, um eine Aktion basierend auf einem gegebenen Eingabevektor durchzuführen
+        # Die Methode verwendet die feed_forward-Funktion des neuronalen Netzwerks, um die Aktion zu bestimmen
+        return self.brain.feed_forward(input_vector)
 
     def __str__(self):
+        # Spezielle Methode zur Definition der String-Repräsentation eines Agenten
+        # Gibt die aktuelle Belohnung des Agenten als String zurück
         return str(self.reward)
 
     def clone(self):
-        # Methode, um eine Kopie dieses Agenten zu erstellen
+        # Methode, um eine Kopie (Klon) des Agenten zu erstellen
         child = Agent()  # Erstellt einen neuen Agenten
-        child.brain = self.brain.copy()  # Kopiert das "Gehirn" (neuronales Netzwerk) des aktuellen Agenten
+        child.brain = self.brain.copy()  # Kopiert das Gehirn (neuronale Netzwerk) des aktuellen Agenten in den neuen Agenten
         return child  # Gibt den neuen Agenten zurück
