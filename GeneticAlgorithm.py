@@ -1,8 +1,8 @@
 import pickle
 import random
 
-from Agent import Agent as ag  # Importiert die Agent-Klasse
-import numpy as np  # Bibliothek für wissenschaftliche Berechnungen
+from Agent import Agent as ag
+import numpy as np
 
 # Definition der Klasse GA (Genetischer Algorithmus)
 class GA:
