@@ -14,8 +14,6 @@ class Agent:
         return self.brain.feed_forward(input_vector)
 
     def __str__(self):
-        # Spezielle Methode zur Definition der String-Repräsentation eines Agenten
-        # Gibt die aktuelle Belohnung des Agenten als String zurück
         return str(self.reward)
 
     def clone(self):
