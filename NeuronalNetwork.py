@@ -1,75 +1,77 @@
 import numpy as np
 
-# Neuronales Netz ist Simulation von Biologischen Gehirn
+# Definition der Klasse NeuronalNetwork
 class NeuronalNetwork:
     def __init__(self, shapes):
         """
-        :param shapes: A list of integers representing the number of neurons in each layer of the neural network.
+        Initialisiert ein neuronales Netzwerk mit einer gegebenen Struktur.
+
+        :param shapes: Eine Liste von Ganzzahlen, die die Anzahl der Neuronen in jeder Schicht des neuronalen Netzwerks repräsentieren.
         """
-        # schichten vom neuronalen netzwerk
-        self.layers = [] #eine Liste von Vektoren (eine Schicht wird von einem Vektor repräsentiert)
-        # die Verbindungen (synapsen) zwischen den layers
-        self.weights = [] #eine Liste von Matrizen (Gewichte pro Schicht werden von einer Matrix repräsentiert)
-        # Vorstellung der aktivierung von den Neuronen
+        # Initialisiere die Listen für die Schichten (layers) und Gewichte (weights)
+        self.layers = []  # Eine Liste von Vektoren, die die Schichten repräsentieren
+        self.weights = []  # Eine Liste von Matrizen, die die Gewichte zwischen den Schichten repräsentieren
+
+        # Definiert die Aktivierungsfunktion
         self.a = self.activation
-        # der Aufbau des Gehirns
-        """
-        Input Schicht hat 8 Neuronen:
-        1) x-Position von Agent
-        2) y-Position von Agent
-        3) x-Geschwindigkeit von Agent
-        4) y-Geschwindigkeit von Agent
-        5) Rotationswinkel von Agent
-        6) Rotationsgeschwindigkeit von Agent
-        7) linkes Bein in Kontakt mit Boden (Wahr oder Falsch / 0 oder 1)
-        8) rechtes Bein in Kontakt mit Boden (Wahr oder Falsch / 0 oder 1)
-        
-        Output Schicht hat 4 Neuronen: Ein Neuron pro Triebwerk
-        """
+
+        # Die Struktur des Netzwerks (Anzahl der Neuronen pro Schicht)
         self.shapes = shapes
 
+        # Initialisiere die Schichten und Gewichte
         for idx in range(len(shapes) - 1):
-            # Wir initialisieren die Schichten und die synapsen
-            # layers machen wir mit 0 voll
-            self.layers.append(np.zeros((shapes[idx], 1)))
-            # weights machen wir mit zufälligen werten rein, weil wir diversität haben wollen.
-            # Diversität, damit wir viele Ansätze haben das Problem zu lösen
-            self.weights.append(np.random.rand(shapes[(idx + 1)], shapes[idx]))
+            self.layers.append(np.zeros((shapes[idx], 1)))  # Initialisiert jede Schicht mit Nullen
+            self.weights.append(
+                np.random.rand(shapes[(idx + 1)], shapes[idx]))  # Initialisiert die Gewichte mit Zufallswerten
 
     def feed_forward(self, input_vector):
         """
-            Performs a feed-forward computation in the neural network.
+        Führt eine Vorwärtsberechnung im neuronalen Netzwerk durch.
 
-            :param input_vector: The input vector to be fed into the network.
-            :type input_vector: numpy.ndarray
+        input_vector: Der Eingabevektor, der in das Netzwerk eingespeist wird.
 
-            :return: The output vector computed by the network.
-            :rtype: numpy.ndarray
+        :return: Der vom Netzwerk berechnete Ausgabevektor.
         """
-        # Wir multiplizieren Vectoren mit Matrizen
-        # Kopiert unseren input vector in unseren Layer rein.
+        # Setzt den Eingabevektor als erste Schicht
         self.layers[0] = input_vector
+
+        # Berechnet den Ausgabevektor durch Vorwärtspropagierung
         for idx in range(1, len(self.layers)):
-            # wir gehen durch die einzelnen schichten durch und multiplizieren die
-            # vorangegagen schichten mit den vorangegangenen weights
-            # weights = Matrix layers = Vector
-            # @ ist von numpy wie man matrizen multipliziert.
-            self.layers[idx] = self.weights[idx - 1] @ self.layers[idx - 1]
-            #lassen es durch die aktivierungsfunktion laufen
-            self.layers[idx] = self.a(self.layers[idx])
-            self.layers[idx].shape = (self.layers[idx].shape[0], 1)
-        # wir rechnen das Ergebnis für den letzten Layer aus und geben das aus.
+            # Multipliziert die vorherige Schicht mit den Gewichten und wendet die Aktivierungsfunktion an
+            self.layers[idx] = self.a(self.weights[idx - 1] @ self.layers[idx - 1])
+            self.layers[idx].shape = (self.layers[idx].shape[0], 1)  # Stellt sicher, dass die Form korrekt ist
+
+        # Gibt den berechneten Ausgabevektor zurück
         return self.a(self.weights[-1] @ self.layers[-1])
 
     def activation(self, vector_x):
-        # sigmoid Rechenformel
+        """
+        Sigmoid-Aktivierungsfunktion.
+
+        :param vector_x: Der Eingabevektor, auf den die Funktion angewendet wird.
+        :type vector_x: numpy.ndarray
+
+        :return: Der transformierte Vektor.
+        :rtype: numpy.ndarray
+        """
+        # Berechnet die Sigmoid-Funktion für den Vektor
         return 1 / (1 + np.exp(-vector_x))
 
     def copy(self):
-        # wir machen eine deepcopy von dem Gehirn
+        """
+        Erstellt eine tiefe Kopie des neuronalen Netzwerks.
+
+        :return: Eine tiefe Kopie des Netzwerks.
+        :rtype: NeuronalNetwork
+        """
+        # Erstellt eine neue Instanz des NeuronalNetwork mit der gleichen Struktur
         cloned_Brain = NeuronalNetwork(self.shapes)
+
+        # Kopiert die Schichten, Gewichte und die Aktivierungsfunktion
         cloned_Brain.layers = self.layers.copy()
         cloned_Brain.weights = self.weights.copy()
         cloned_Brain.a = self.activation
         cloned_Brain.shapes = self.shapes.copy()
+
+        # Gibt die neue Instanz zurück
         return cloned_Brain

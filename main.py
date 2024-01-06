@@ -2,36 +2,37 @@ import gymnasium as gym
 from GeneticAlgorithm import GA
 import numpy as np
 
-# Erstelle eine Umgebung für das Gym (Reinforcement Learning Environment)
+# Erstellen einer neuen Umgebung für das LunarLander-v2 Spiel
 env = gym.make("LunarLander-v2")
+# Initialisieren des genetischen Algorithmus
 ga = GA()
-
-# Eine Endlosschleife, die das Training durchführt
+# Starten einer Endlosschleife für das Training
 while True:
-    # Iteriere durch die Population des genetischen Algorithmus
+    # Durchlaufen der gesamten Population der Agenten
     for idx in range(ga.population_size):
-        # Holen Sie sich den Agenten aus der aktuellen Population
+        # Auswählen eines Agenten aus der Population
         agent = ga.population[idx]
-        # Setze die Umgebung zurück und erhalte die erste Beobachtung
+        # Zurücksetzen der Umgebung zu Beginn jeder Episode und erhalten der Anfangsbeobachtung
         observation, info = env.reset()
-        # Iteriere durch maximal 1000 Schritte (Zeitschritte) in der Umgebung
+        # Durchführen von bis zu 1000 Schritten (Aktionen) in der Umgebung
         for _ in range(1000):
-            # Wende die Aktion an, die vom Agenten basierend auf der Beobachtung vorgeschlagen wird
-            action = np.argmax(agent.fuehre_aktion(observation))  # Agentenrichtlinie, die die Beobachtung und Info verwendet
+            # Auswahl der Aktion basierend auf den Beobachtungen und der Strategie des Agenten
+            action = np.argmax(agent.fuehre_aktion(observation))
+            # Ausführen der Aktion in der Umgebung und Erhalten des neuen Zustands und der Belohnung
             observation, reward, terminated, truncated, info = env.step(action)
-            # Setze die Belohnung des Agenten basierend auf der aktuellen Belohnung fest
+            # Aktualisieren der Belohnung des Agenten
             agent.reward = reward
-            # Überprüfe, ob die Episode beendet ist (terminated) oder abgeschnitten (truncated)
+            # Beenden der Episode, wenn das Spiel vorbei ist (entweder erfolgreich gelandet oder abgestürzt)
             if terminated or truncated:
                 break
-    # Führe die Reproduktion und Crossover in der genetischen Algorithmus-Population durch
+    # Anwenden des genetischen Algorithmus, um die nächste Generation zu erzeugen
     ga.reproduce_crossover()
-    # Speichere den aktuellen Zustand des genetischen Algorithmus (z. B. Gewichte der Agenten)
+    # Speichern eines Checkpoints, wahrscheinlich um den Fortschritt zu speichern
     ga.checkpoint()
-    # Erzwinge die Aktualisierung der Belohnungen in der Population
+    # Erzwingen der Belohnungen, vielleicht um sicherzustellen, dass alle Belohnungen berücksichtigt werden
     ga.force_rewards()
-    # Überprüfe, ob der genetische Algorithmus beendet werden soll
+    # Überprüfen, ob das Trainingskriterium erreicht ist und das Training beenden, wenn ja
     if ga.stop:
         break
-# Schließe die Gym-Umgebung
+# Schließen der Umgebung, wenn das Training beendet ist
 env.close()
