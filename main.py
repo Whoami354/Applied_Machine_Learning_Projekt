@@ -31,7 +31,7 @@ while True:
     ga.checkpoint()
     # Erzwingen der Belohnungen, um sicherzustellen, dass alle Belohnungen berücksichtigt werden
     ga.force_rewards()
-    # Überprüfen, ob das Trainingskriterium erreicht ist und das Training beenden, wenn ja
+    # Überprüfen, ob das Trainingskriterium erreicht ist und das Training beenden
     if ga.stop:
         break
 # Schließen der Umgebung, wenn das Training beendet ist

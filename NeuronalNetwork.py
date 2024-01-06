@@ -2,15 +2,11 @@ import numpy as np
 
 # Definition der Klasse NeuronalNetwork
 class NeuronalNetwork:
+    #shapes: Eine Liste von Ganzzahlen, die die Anzahl der Neuronen in jeder Schicht des neuronalen Netzwerks repräsentieren.
     def __init__(self, shapes):
-        """
-        Initialisiert ein neuronales Netzwerk mit einer gegebenen Struktur.
-
-        :param shapes: Eine Liste von Ganzzahlen, die die Anzahl der Neuronen in jeder Schicht des neuronalen Netzwerks repräsentieren.
-        """
-        # Initialisiere die Listen für die Schichten (layers) und Gewichte (weights)
-        self.layers = []  # Eine Liste von Vektoren, die die Schichten repräsentieren
-        self.weights = []  # Eine Liste von Matrizen, die die Gewichte zwischen den Schichten repräsentieren
+        # Initialisiere die Listen für die Schichten (layers, als Vektor) und Gewichte (weights, also matrizen)
+        self.layers = []
+        self.weights = []
 
         # Definiert die Aktivierungsfunktion
         self.a = self.activation
@@ -58,16 +54,7 @@ class NeuronalNetwork:
         return 1 / (1 + np.exp(-vector_x))
 
     def copy(self):
-        """
-        Erstellt eine tiefe Kopie des neuronalen Netzwerks.
-
-        :return: Eine tiefe Kopie des Netzwerks.
-        :rtype: NeuronalNetwork
-        """
-        # Erstellt eine neue Instanz des NeuronalNetwork mit der gleichen Struktur
         cloned_Brain = NeuronalNetwork(self.shapes)
-
-        # Kopiert die Schichten, Gewichte und die Aktivierungsfunktion
         cloned_Brain.layers = self.layers.copy()
         cloned_Brain.weights = self.weights.copy()
         cloned_Brain.a = self.activation
