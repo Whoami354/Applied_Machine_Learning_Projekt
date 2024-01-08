@@ -15,7 +15,7 @@ while True:
         # Durchführen von bis zu 1000 Schritten
         for _ in range(1000):
             # Auswahl der Aktion basierend auf den Beobachtungen und der Strategie des Agenten
-            action = np.argmax(agent.fuehre_aktion(observation))
+            action = np.argmax(agent.lead_action(observation))
             # Ausführen der Aktion in der Umgebung und Erhalten des neuen Zustands und der Belohnung
             observation, reward, terminated, truncated, info = env.step(action)
             # Aktualisieren der Belohnung des Agenten

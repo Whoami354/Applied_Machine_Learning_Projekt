@@ -8,7 +8,7 @@ class Agent:
         # Belohnung wird als Wert für die Leistung verwendet
         self.reward = 0
 
-    def fuehre_aktion(self, input_vector):
+    def lead_action(self, input_vector):
         # Methode, um eine Aktion basierend auf einem gegebenen Eingabevektor durchzuführen
         # Die Methode verwendet die feed_forward-Funktion des neuronalen Netzwerks, um die Aktion zu bestimmen
         return self.brain.feed_forward(input_vector)
