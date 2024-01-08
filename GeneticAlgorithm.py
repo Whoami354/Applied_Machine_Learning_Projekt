@@ -56,20 +56,22 @@ class GA:
         # Methode zur Reproduktion der Bevölkerung mit Crossover
         print(self.generation_number)
         sorted_agents = sorted(self.population, key=lambda x: x.reward, reverse=True)
-        self.get_rewards(self.Goal)  # Aktualisiert die Belohnungen und prüft die Abbruchbedingung
+        self.get_average_rewards(self.Goal)  # Aktualisiert die Belohnungen und prüft die Abbruchbedingung
         n = int(len(sorted_agents) * 0.1)  # Bestimmt die Anzahl der Top-10%
         top_20 = sorted_agents[:n]  # Selektiert die besten 10%
         new_population = []
         for idx in range(self.population_size):
-            candidate1 = top_20[random.randrange(n)]  # Wählt zufällig den ersten Elternteil
-            candidate2 = top_20[random.randrange(n)]  # Wählt zufällig den zweiten Elternteil
+            random_first_parent = top_20[random.randrange(n)]
+            random_second_parent = top_20[random.randrange(n)]
+            candidate1 = random_first_parent  # Wählt zufällig den ersten Elternteil
+            candidate2 = random_second_parent  # Wählt zufällig den zweiten Elternteil
             child = self.crossover(candidate1, candidate2)  # Erzeugt ein Kind durch Crossover
             child = self.mutation(child)  # Wendet Mutation auf das Kind an
             new_population.append(child)  # Fügt das Kind zur neuen Bevölkerung hinzu
         self.population = new_population  # Aktualisiert die Bevölkerung
         self.generation_number += 1  # Erhöht die Generationenzahl
 
-    def get_rewards(self, threshold):
+    def get_average_rewards(self, threshold):
         # Methode zur Berechnung der durchschnittlichen Belohnung und Überprüfung der Abbruchbedingung
         rewards = sum(map(lambda agent: agent.reward, self.population))
         average_reward = rewards / len(self.population)
