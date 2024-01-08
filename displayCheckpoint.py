@@ -38,6 +38,6 @@ while True:
             observation, reward, terminated, truncated, info = env.step(action)
             # Aktualisiert die Belohnung des Agenten
             agent.reward = reward
-            # Beendet die Episode, wenn das Spiel vorbei ist
+            # Beenden der Episode, wenn das Spiel vorbei ist (entweder erfolgreich gelandet oder abgestürzt)
             if terminated or truncated:
                 break
