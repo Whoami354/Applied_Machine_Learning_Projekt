@@ -11,6 +11,8 @@ with open("rewards.txt", "r") as reward_file:
         # Konvertiert jede Belohnung in eine Fließkommazahl, rundet auf drei Dezimalstellen ab
         y_values.append(np.round(float(reward), decimals=3))
     x_values = range(len(rewards))  # Erstellt eine Liste von x-Werten entsprechend der Anzahl der Belohnungen
+    plt.xlabel("Generations")
+    plt.ylabel("Rewards")
     plt.plot(x_values, y_values, "-")  # Plotte die Belohnungen als Linie
     plt.show()
 
