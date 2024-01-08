@@ -39,15 +39,6 @@ class NeuronalNetwork:
         return self.a(self.weights[-1] @ self.layers[-1])
 
     def activation(self, vector_x):
-        """
-        Sigmoid-Aktivierungsfunktion.
-
-        :param vector_x: Der Eingabevektor, auf den die Funktion angewendet wird.
-        :type vector_x: numpy.ndarray
-
-        :return: Der transformierte Vektor.
-        :rtype: numpy.ndarray
-        """
         # Berechnet die Sigmoid-Funktion für den Vektor
         return 1 / (1 + np.exp(-vector_x))
 
