@@ -25,8 +25,6 @@ class NeuronalNetwork:
         Führt eine Vorwärtsberechnung im neuronalen Netzwerk durch.
 
         input_vector: Der Eingabevektor, der in das Netzwerk eingespeist wird.
-
-        :return: Der vom Netzwerk berechnete Ausgabevektor.
         """
         # Setzt den Eingabevektor als erste Schicht
         self.layers[0] = input_vector

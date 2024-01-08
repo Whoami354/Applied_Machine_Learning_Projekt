@@ -27,7 +27,7 @@ while True:
     ga.reproduce_crossover()
     # Speichern eines Checkpoints, um den Fortschritt zu speichern
     ga.checkpoint()
-    # Erzwingen der Belohnungen, um sicherzustellen, dass alle Belohnungen berücksichtigt werden
+    # Die Durchschnittliche Belohnung wird in eine Datei geschrieben
     ga.force_rewards()
     # Überprüfen, ob das Trainingskriterium erreicht ist und das Training beenden
     if ga.stop:
