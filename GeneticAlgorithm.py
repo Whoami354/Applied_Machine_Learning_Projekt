@@ -58,11 +58,11 @@ class GA:
         sorted_agents = sorted(self.population, key=lambda x: x.reward, reverse=True)
         self.get_average_rewards(self.Goal)  # Aktualisiert die Belohnungen und prüft die Abbruchbedingung
         n = int(len(sorted_agents) * 0.1)  # Bestimmt die Anzahl der Top-10%
-        top_20 = sorted_agents[:n]  # Selektiert die besten 10%
+        top_10 = sorted_agents[:n]  # Selektiert die besten 10%
         new_population = []
         for idx in range(self.population_size):
-            random_first_parent = top_20[random.randrange(n)] # Wählt zufällig den ersten Elternteil
-            random_second_parent = top_20[random.randrange(n)] # Wählt zufällig den zweiten Elternteil
+            random_first_parent = top_10[random.randrange(n)] # Wählt zufällig den ersten Elternteil
+            random_second_parent = top_10[random.randrange(n)] # Wählt zufällig den zweiten Elternteil
             candidate1 = random_first_parent
             candidate2 = random_second_parent
             child = self.crossover(candidate1, candidate2)  # Erzeugt ein Kind durch Crossover
