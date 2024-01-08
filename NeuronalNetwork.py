@@ -21,16 +21,11 @@ class NeuronalNetwork:
                 np.random.rand(shapes[(idx + 1)], shapes[idx]))  # Initialisiert die Gewichte mit Zufallswerten
 
     def feed_forward(self, input_vector):
-        """
-        Führt eine Vorwärtsberechnung im neuronalen Netzwerk durch.
-
-        input_vector: Der Eingabevektor, der in das Netzwerk eingespeist wird.
-        """
         # Setzt den Eingabevektor als erste Schicht
         self.layers[0] = input_vector
 
         # Berechnet den Ausgabevektor durch Vorwärtspropagierung
-        for idx in range(1, len(self.layers)):
+        for idx in range(1, len(self.layers) - 1):
             # Multipliziert die vorherige Schicht mit den Gewichten und wendet die Aktivierungsfunktion an
             self.layers[idx] = self.a(self.weights[idx - 1] @ self.layers[idx - 1])
             self.layers[idx].shape = (self.layers[idx].shape[0], 1)  # Stellt sicher, dass die Form korrekt ist
