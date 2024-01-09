@@ -63,9 +63,7 @@ class GA:
         for idx in range(self.population_size):
             random_first_parent = top_10[random.randrange(n)] # Wählt zufällig den ersten Elternteil
             random_second_parent = top_10[random.randrange(n)] # Wählt zufällig den zweiten Elternteil
-            candidate1 = random_first_parent
-            candidate2 = random_second_parent
-            child = self.crossover(candidate1, candidate2)  # Erzeugt ein Kind durch Crossover
+            child = self.crossover(random_first_parent, random_second_parent)  # Erzeugt ein Kind durch Crossover
             child = self.mutation(child)  # Wendet Mutation auf das Kind an
             new_population.append(child)  # Fügt das Kind zur neuen Bevölkerung hinzu
         self.population = new_population  # Aktualisiert die Bevölkerung
