@@ -25,7 +25,7 @@ while True:
                 break
     # Anwenden des genetischen Algorithmus, um die nächste Generation zu erzeugen
     ga.reproduce_crossover()
-    # Speichern eines Checkpoints, um den Fortschritt zu speichern
+    # Speichern eines Checkpoints, um die aktuelle Generation an Agenten zu speichern
     ga.checkpoint()
     # Die Durchschnittliche Belohnung wird in eine Datei geschrieben
     ga.force_rewards()

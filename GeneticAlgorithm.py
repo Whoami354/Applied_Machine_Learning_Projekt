@@ -85,10 +85,10 @@ class GA:
             for line in self.average_reward:
                 file.write(str(line) + "\n")  # Schreibt jede Belohnung in die Datei
 
-    def crossover(self, candidate1, candidate2):
+    def crossover(self, first_partent, second_parent):
         # Methode zur Durchführung eines Crossovers zwischen zwei Agenten
         child = ag()  # Erstellt einen neuen Agenten (Kind)
-        parents = [candidate1, candidate2]  # Definiert die Elternteile
+        parents = [first_partent, second_parent]  # Definiert die Elternteile
         for idx in range(len(child.brain.weights)):
             matrix = child.brain.weights[idx]  # Zugriff auf die Gewichtsmatrix des Kindes
             for i in range(matrix.shape[0]):
