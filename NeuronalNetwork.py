@@ -1,6 +1,5 @@
 import numpy as np
 
-# Definition der Klasse NeuronalNetwork
 class NeuronalNetwork:
     #shapes: Eine Liste von Ganzzahlen, die die Anzahl der Neuronen in jeder Schicht des neuronalen Netzwerks repräsentieren.
     def __init__(self, shapes):
