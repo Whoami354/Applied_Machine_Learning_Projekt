@@ -25,6 +25,7 @@ with open("checkpoint.pickle", "rb") as file:
 
 # Startet die Haupt-Simulationschleife
 while True:
+    # Durchlaufen der gesamten Population der Agenten
     for idx in range(population_size):
         # Auswählen des aktuellen Agenten aus der Population
         agent = population[idx]
