@@ -11,7 +11,7 @@ class Agent:
         X-Geschwindigkeit
         Y-Geschwindigkeit
         Neigung des schiffes
-        Wingelgeschwindigkeit des Schiffes
+        Winkelgeschwindigkeit des Schiffes
         Linkes Bein auf den Boden (Wahr/Falsch)
         Rechtes Bein auf den Boden (Wahr/Falsch)
         """
