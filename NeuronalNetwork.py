@@ -22,7 +22,6 @@ class NeuronalNetwork:
     def feed_forward(self, input_vector):
         # Setzt den Eingabevektor als erste Schicht
         self.layers[0] = input_vector
-
         # Berechnet den Ausgabevektor durch Vorwärtspropagierung
         for idx in range(1, len(self.layers) - 1):
             # Multipliziert die vorherige Schicht mit den Gewichten und wendet die Aktivierungsfunktion an
