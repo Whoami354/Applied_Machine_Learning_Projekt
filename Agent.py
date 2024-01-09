@@ -4,6 +4,17 @@ from NeuronalNetwork import NeuronalNetwork as nn
 class Agent:
     def __init__(self):
         # Das neuronale Netzwerk hat 8 Eingabeneuronen und 4 Ausgabeneuronen
+        """
+        8 Eingabeneuronen:
+        X-distanz vom Ziel
+        Y-distanz vom Ziel
+        X-Geschwindigkeit
+        Y-Geschwindigkeit
+        Neigung des schiffes
+        Wingelgeschwindigkeit des Schiffes
+        Linkes Bein auf den Boden (Wahr/Falsch)
+        Rechtes Bein auf den Boden (Wahr/Falsch)
+        """
         self.brain = nn([8, 4])
         # Belohnung wird als Wert für die Leistung verwendet
         self.reward = 0
