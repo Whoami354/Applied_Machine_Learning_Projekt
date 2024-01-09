@@ -8,7 +8,7 @@ import numpy as np
 class GA:
     def __init__(self):
         # Initialisierung der Eigenschaften des genetischen Algorithmus
-        self.Goal = 150  # Abbruchbedingung, Zielbelohnung
+        self.goal = 150  # Abbruchbedingung, Zielbelohnung
         self.mutation_rate = 0.10  # Mutationswahrscheinlichkeit
         self.population = []  # Liste der Agenten (Bevölkerung)
         self.average_reward = []  # Liste der durchschnittlichen Belohnungen
@@ -56,7 +56,7 @@ class GA:
         # Methode zur Reproduktion der Bevölkerung mit Crossover
         print(self.generation_number)
         sorted_agents = sorted(self.population, key=lambda x: x.reward, reverse=True)
-        self.average_rewards(self.Goal)  # Aktualisiert die Belohnungen und prüft die Abbruchbedingung
+        self.average_rewards(self.goal)  # Aktualisiert die Belohnungen und prüft die Abbruchbedingung
         n = int(len(sorted_agents) * 0.1)  # Bestimmt die Anzahl der Top-10%
         top_10 = sorted_agents[:n]  # Selektiert die besten 10%
         new_population = []
