@@ -56,7 +56,7 @@ class GA:
         # Methode zur Reproduktion der Bevölkerung mit Crossover
         print(self.generation_number)
         sorted_agents = sorted(self.population, key=lambda x: x.reward, reverse=True)
-        self.get_average_rewards(self.Goal)  # Aktualisiert die Belohnungen und prüft die Abbruchbedingung
+        self.average_rewards(self.Goal)  # Aktualisiert die Belohnungen und prüft die Abbruchbedingung
         n = int(len(sorted_agents) * 0.1)  # Bestimmt die Anzahl der Top-10%
         top_10 = sorted_agents[:n]  # Selektiert die besten 10%
         new_population = []
@@ -69,7 +69,7 @@ class GA:
         self.population = new_population  # Aktualisiert die Bevölkerung
         self.generation_number += 1  # Erhöht die Generationenzahl
 
-    def get_average_rewards(self, threshold):
+    def average_rewards(self, threshold):
         # Methode zur Berechnung der durchschnittlichen Belohnung und Überprüfung der Abbruchbedingung
         rewards = sum(map(lambda agent: agent.reward, self.population))
         average_reward = rewards / len(self.population)
