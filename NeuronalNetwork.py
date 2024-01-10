@@ -16,8 +16,7 @@ class NeuronalNetwork:
         # Initialisiere die Schichten und Gewichte
         for idx in range(len(shapes) - 1):
             self.layers.append(np.zeros((shapes[idx], 1)))  # Initialisiert jede Schicht mit Nullen
-            self.weights.append(
-                np.random.rand(shapes[(idx + 1)], shapes[idx]))  # Initialisiert die Gewichte mit Zufallswerten
+            self.weights.append(np.random.rand(shapes[(idx + 1)], shapes[idx]))  # Initialisiert die Gewichte mit Zufallswerten
 
     def feed_forward(self, input_vector):
         # Setzt den Eingabevektor als erste Schicht
