@@ -57,7 +57,7 @@ class GA:
         print(self.generation_number)
         sorted_agents = sorted(self.population, key=lambda x: x.reward, reverse=True)
         self.average_rewards(self.goal)  # Aktualisiert die Belohnungen und prüft die Abbruchbedingung
-        n = int(len(sorted_agents) * 0.1)  # Bestimmt die Anzahl der Top-10%
+        n = int(len(sorted_agents) * 0.1)  # Bestimmt die Anzahl der Top 10%
         top_10 = sorted_agents[:n]  # Selektiert die besten 10%
         new_population = []
         for idx in range(self.population_size):
