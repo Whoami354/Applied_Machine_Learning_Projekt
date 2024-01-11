@@ -42,4 +42,4 @@ while True:
             # Beenden der Episode, wenn das Spiel vorbei ist (entweder erfolgreich gelandet oder abgestürzt)
             if terminated or truncated:
                 break
-        print(agent.reward)
+        print(f"Reward: {agent.reward}")

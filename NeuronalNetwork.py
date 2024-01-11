@@ -27,7 +27,7 @@ class NeuronalNetwork:
             self.layers[idx] = self.a(self.weights[idx - 1] @ self.layers[idx - 1])
             self.layers[idx].shape = (self.layers[idx].shape[0], 1)  # Stellt sicher, dass die Form korrekt ist
 
-        # Gibt den berechneten Ausgabevektor zurück
+        # Gibt den berechneten Ausgabevektor zurück, der keine n-Anzahl an Spalten haben soll
         return self.a(self.weights[-1] @ self.layers[-1])
 
     def activation(self, vector_x):
