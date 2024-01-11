@@ -9,7 +9,7 @@ class GA:
     def __init__(self):
         # Initialisierung der Eigenschaften des genetischen Algorithmus
         self.goal = 150  # Abbruchbedingung, Zielbelohnung
-        self.mutation_rate = 0.10  # Mutationswahrscheinlichkeit
+        self.mutation_rate = 0.08  # Mutationswahrscheinlichkeit
         self.population = []  # Liste der Agenten (Bevölkerung)
         self.average_reward = []  # Liste der durchschnittlichen Belohnungen
         self.generation_number = 0  # Aktuelle Generation
