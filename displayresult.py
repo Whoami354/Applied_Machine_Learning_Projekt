@@ -1,4 +1,4 @@
-import gym
+import gymnasium as gym
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,7 +19,7 @@ with open("rewards.txt", "r") as reward_file:
 env = gym.make("LunarLander-v2", render_mode='human')
 
 # Laden der Population aus einer Pickle-Datei
-with open("checkpoint.pickle", "rb") as file:
+with open("checkpoint008.pickle", "rb") as file:
     population = pickle.load(file)  # Lädt die Population
     population_size = len(population)  # Bestimmt die Größe der Population
 
@@ -42,3 +42,4 @@ while True:
             # Beenden der Episode, wenn das Spiel vorbei ist (entweder erfolgreich gelandet oder abgestürzt)
             if terminated or truncated:
                 break
+        print(agent.reward)
