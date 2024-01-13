@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Laden und Plotten der Belohnungen aus einer Datei
-with open("rewards.txt", "r") as reward_file:
+with open("150_008_1200.txt", "r") as reward_file:
     rewards = reward_file.readlines()
     y_values = []
     for reward in rewards:
