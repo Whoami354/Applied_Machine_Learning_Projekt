@@ -100,5 +100,5 @@ class GA:
 
     def checkpoint(self):
         # Methode zum Speichern der aktuellen Bevölkerung in einer Datei
-        with open("checkpoint008.pickle","wb") as file:
+        with open("checkpoint008_v2.pickle","wb") as file:
             pickle.dump(self.population, file)  # Schreibt die Bevölkerung in die Datei
