@@ -15,7 +15,7 @@ with open("150_008_1200.txt", "r") as reward_file:
     plt.ylabel("Rewards")
     plt.plot(x_values, y_values, "-")  # Plotte die Belohnungen als Linie
     plt.show()
-
+counter = 0
 env = gym.make("LunarLander-v2", render_mode='human')
 
 # Laden der Population aus einer Pickle-Datei
@@ -42,4 +42,5 @@ while True:
             # Beenden der Episode, wenn das Spiel vorbei ist (entweder erfolgreich gelandet oder abgestürzt)
             if terminated or truncated:
                 break
-        print(f"Reward: {agent.reward}")
+        counter += 1
+        print(f"Reward {counter}: {agent.reward}")
