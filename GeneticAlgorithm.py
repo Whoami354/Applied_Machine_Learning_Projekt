@@ -20,25 +20,6 @@ class GA:
         for idx in range(self.population_size):
             self.population.append(ag())  # Fügt neue Agenten zur Bevölkerung hinzu
 
-    #def reproduce(self):
-    #    # Methode zur Reproduktion der Bevölkerung ohne Crossover
-    #    print(self.generation_number)
-    #    # Sortiert die Agenten nach ihrer Belohnung in absteigender Reihenfolge
-    #    sorted_agents = sorted(self.population, key=lambda x: x.reward, reverse=True)
-    #    # Berechnet die Gesamtbelohnung und den Durchschnitt
-    #    rewards = sum(map(lambda agent: agent.reward, sorted_agents))
-    #    print("rewards:", rewards / len(self.population))
-    #    # Bestimmt die Anzahl der Agenten, die zu den besten 20% gehören
-    #    n = int(len(sorted_agents) * 0.2)
-    #    top_20 = sorted_agents[:n]  # Selektiert die besten 20%
-    #    new_population = []
-    #    for idx in range(self.population_size):
-    #        candidate = top_20[idx % n]
-    #        child = self.mutation(candidate)  # Wendet Mutation auf den Kandidaten an
-    #        new_population.append(child)  # Fügt das Kind zur neuen Bevölkerung hinzu
-    #    self.generation_number += 1  # Erhöht die Generationenzahl
-    #    self.population = new_population  # Aktualisiert die Bevölkerung
-
     def mutation(self, a):
         # Methode zur Durchführung einer Mutation auf einem Agenten
         agent = a.clone()  # Erstellt eine Kopie des Agenten
