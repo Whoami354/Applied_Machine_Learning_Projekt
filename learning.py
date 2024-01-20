@@ -4,33 +4,33 @@ import numpy as np
 
 env = gym.make("LunarLander-v2")
 ga = GA()
-# Starten einer Endlosschleife für das Training
+# Start an endless loop for training
 while True:
-    # Durchlaufen der gesamten Population der Agenten
+    # Iterate through the entire population of agents
     for idx in range(ga.population_size):
-        # Auswählen des aktuellen Agenten aus der Population
+        # Selecting the current agent from the population
         agent = ga.population[idx]
-        # Zurücksetzen der Umgebung zu Beginn jeder Episode und erhalten der Anfangsbeobachtung
+        # Reset the environment at the beginning of each episode and maintain the initial observation
         observation, info = env.reset()
-        # Durchführen von bis zu 1000 Schritten
+        # Perform up to 1000 steps
         for _ in range(1000):
-            # Auswahl der Aktion basierend auf den Beobachtungen und der Strategie des Agenten
+            # Selection of the action based on the agent's observations and strategy
             action = np.argmax(agent.execute_action(observation))
-            # Ausführen der Aktion in der Umgebung und Erhalten des neuen Zustands und der Belohnung
+            # Perform the action in the environment and receive the new status and reward
             observation, reward, terminated, truncated, info = env.step(action)
-            # Aktualisieren der Belohnung des Agenten
+            # Updating the agent's reward
             agent.reward = reward
-            # Beenden der Episode, wenn das Spiel vorbei ist (entweder erfolgreich gelandet oder abgestürzt)
+            # End the episode when the game is over (either successfully landed or crashed)
             if terminated or truncated:
                 break
-    # Anwenden des genetischen Algorithmus, um die nächste Generation zu erzeugen
+    # Applying the genetic algorithm to create the next generation
     ga.reproduce_crossover()
-    # Speichern eines Checkpoints, um die aktuelle Generation an Agenten zu speichern
+    # Saving a checkpoint to save the current generation of agents
     ga.checkpoint()
-    # Die Durchschnittliche Belohnung wird in eine Datei geschrieben
+    # The average reward is written to a file
     ga.force_rewards()
-    # Überprüfen, ob das Trainingskriterium erreicht ist und das Training beenden
+    # Check whether the training criterion has been reached and end the training
     if ga.stop:
         break
-# Schließen der Umgebung, wenn das Training beendet ist
+# Close the environment when training is finished
 env.close()

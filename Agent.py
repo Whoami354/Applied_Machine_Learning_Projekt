@@ -1,34 +1,34 @@
 from NeuronalNetwork import NeuronalNetwork as nn
 
-# Definition der Klasse Agent
+# Definition of the Agent class
 class Agent:
     def __init__(self):
-        # Das neuronale Netzwerk hat 8 Eingabeneuronen und 4 Ausgabeneuronen
+        # The neural network has 8 input neurons and 4 output neurons
         """
-        8 Eingabeneuronen:
-        X-distanz vom Ziel
-        Y-distanz vom Ziel
-        X-Geschwindigkeit
-        Y-Geschwindigkeit
-        Neigung des schiffes
-        Winkelgeschwindigkeit des Schiffes
-        Linkes Bein auf den Boden (Wahr/Falsch)
-        Rechtes Bein auf den Boden (Wahr/Falsch)
+        8 input eurons:
+        X-distance from target
+        Y-distance from target
+        X-speed
+        Y-speed
+        Inclination of the ship
+        Angular speed of the ship
+        Left leg on the ground (True/False)
+        Right leg on the ground (True/False)
         """
         self.brain = nn([8, 4])
-        # Belohnung wird als Wert für die Leistung verwendet
+        # Reward is used as a value for performance
         self.reward = 0
 
     def execute_action(self, input_vector):
-        # Methode, um eine Aktion basierend auf einem gegebenen Eingabevektor durchzuführen
-        # Die Methode verwendet die feed_forward-Funktion des neuronalen Netzwerks, um die Aktion zu bestimmen
+        # Method to perform an action based on a given input vector
+        # The method uses the feed_forward function of the neural network to determine the action
         return self.brain.feed_forward(input_vector)
 
     def __str__(self):
         return str(self.reward)
 
     def clone(self):
-        # Methode, um eine Kopie (Klon) des Agenten zu erstellen
-        child = Agent()  # Erstellt einen neuen Agenten
-        child.brain = self.brain.copy()  # Kopiert das Gehirn (neuronale Netzwerk) des aktuellen Agenten in den neuen Agenten
-        return child  # Gibt den neuen Agenten zurück
+        # Method to create a copy (clone) of the agent
+        child = Agent()  # Creates a new agent
+        child.brain = self.brain.copy()  # Copies the brain (neural network) of the current agent into the new agent
+        return child  # Returns the new agent

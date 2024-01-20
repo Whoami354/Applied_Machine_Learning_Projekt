@@ -1,37 +1,37 @@
 import numpy as np
 
 class NeuronalNetwork:
-    #shapes: Eine Liste von Ganzzahlen, die die Anzahl der Neuronen in jeder Schicht des neuronalen Netzwerks repräsentieren.
+    # shapes: A list of integers representing the number of neurons in each layer of the neural network.
     def __init__(self, shapes):
-        # Initialisiere die Listen für die Schichten (layers, als Vektor) und Gewichte (weights, also matrizen)
+        # Initialize the lists for the layers (as vectors) and weights (as matrices)
         self.layers = []
         self.weights = []
 
-        # Definiert die Aktivierungsfunktion
+        # Defines the activation function
         self.a = self.activation
 
-        # Die Struktur des Netzwerks (Anzahl der Neuronen pro Schicht)
+        # The structure of the network (number of neurons per layer)
         self.shapes = shapes
 
-        # Initialisiere die Schichten und Gewichte
+        # Initialize the layers and weights
         for idx in range(len(shapes) - 1):
-            self.layers.append(np.zeros((shapes[idx], 1)))  # Initialisiert jede Schicht mit Nullen
-            self.weights.append(np.random.rand(shapes[(idx + 1)], shapes[idx]))  # Initialisiert die Gewichte mit Zufallswerten
+            self.layers.append(np.zeros((shapes[idx], 1)))  # Initializes each layer with zeros
+            self.weights.append(np.random.rand(shapes[(idx + 1)], shapes[idx]))  # Initializes the weights with random values
 
     def feed_forward(self, input_vector):
-        # Setzt den Eingabevektor als erste Schicht
+        # Sets the input vector as the first layer
         self.layers[0] = input_vector
-        # Berechnet den Ausgabevektor durch Vorwärtspropagierung
+        # Calculates the output vector by forward propagation
         for idx in range(1, len(self.layers) - 1):
-            # Multipliziert die vorherige Schicht mit den Gewichten und wendet die Aktivierungsfunktion an
+            # Multiplies the previous layer by the weights and applies the activation function
             self.layers[idx] = self.a(self.weights[idx - 1] @ self.layers[idx - 1])
-            self.layers[idx].shape = (self.layers[idx].shape[0], 1)  # Stellt sicher, dass die Form korrekt ist
+            self.layers[idx].shape = (self.layers[idx].shape[0], 1)  # Ensures that the shape is correct
 
-        # Gibt den berechneten Ausgabevektor zurück, der keine n-Anzahl an Spalten haben soll
+        # Returns the calculated output vector, which should not have n number of columns
         return self.a(self.weights[-1] @ self.layers[-1])
 
     def activation(self, vector_x):
-        # Berechnet die Sigmoid-Funktion für den Vektor
+        # Calculates the sigmoid function for the vector
         return 1 / (1 + np.exp(-vector_x))
 
     def copy(self):
@@ -41,5 +41,5 @@ class NeuronalNetwork:
         cloned_Brain.a = self.activation
         cloned_Brain.shapes = self.shapes.copy()
 
-        # Gibt die neue Instanz zurück
+        # Returns the new instance
         return cloned_Brain

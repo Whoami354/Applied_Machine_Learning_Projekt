@@ -4,82 +4,82 @@ import random
 from Agent import Agent as ag
 import numpy as np
 
-# Definition der Klasse GA (Genetischer Algorithmus)
+# Definition of the class GA (Genetic Algorithm)
 class GA:
     def __init__(self):
-        # Initialisierung der Eigenschaften des genetischen Algorithmus
-        self.goal = 150  # Abbruchbedingung, Zielbelohnung
-        self.mutation_rate = 0.08  # Mutationswahrscheinlichkeit
-        self.population = []  # Liste der Agenten (Bevölkerung)
-        self.average_reward = []  # Liste der durchschnittlichen Belohnungen
-        self.generation_number = 0  # Aktuelle Generation
-        self.stop = False  # Abbruchbedingung (Flag)
-        self.population_size = 1200  # Größe der Bevölkerung
+        # Initialization of the properties of the genetic algorithm
+        self.goal = 150  # Termination condition
+        self.mutation_rate = 0.08  # Mutation probability
+        self.population = []  # List of agents (population)
+        self.average_reward = []  # List of average rewards
+        self.generation_number = 0  # Current generation
+        self.stop = False  # Termination condition (flag)
+        self.population_size = 1200  # Size of the population
 
-        # Initialisierung der Anfangsbevölkerung
+        # Initialization of the starting population
         for idx in range(self.population_size):
-            self.population.append(ag())  # Fügt neue Agenten zur Bevölkerung hinzu
+            self.population.append(ag())  # Adds new agents to the population
 
     def mutation(self, a):
-        # Methode zur Durchführung einer Mutation auf einem Agenten
-        agent = a.clone()  # Erstellt eine Kopie des Agenten
+        # Method for performing a mutation on an agent
+        agent = a.clone()  # Creates a copy of the agent
         for idx in range(len(agent.brain.weights)):
-            matrix = agent.brain.weights[idx]  # Zugriff auf die Gewichtsmatrix
+            matrix = agent.brain.weights[idx]  # Access to the weight matrix
             for i in range(matrix.shape[0]):
                 for j in range(matrix.shape[1]):
-                    rand = np.random.uniform()  # Erzeugt eine Zufallszahl
-                    # Wendet Mutation an, wenn die Zufallszahl kleiner als die Mutationsrate ist
+                    rand = np.random.uniform()  # Generates a random number
+                    # Applies mutation if the random number is smaller than the mutation rate
                     if rand < self.mutation_rate:
-                        matrix[i, j] += np.random.uniform(-0.015, 0.015)  # Verändert das Gewicht leicht
-        return agent  # Gibt den mutierten Agenten zurück
+                        matrix[i, j] += np.random.uniform(-0.015, 0.015)  # Changes the weight slightly
+        return agent  # Returns the mutated agent
 
     def reproduce_crossover(self):
-        # Methode zur Reproduktion der Bevölkerung mit Crossover
+        # Population reproduction method with crossover
         print(self.generation_number)
         sorted_agents = sorted(self.population, key=lambda x: x.reward, reverse=True)
-        self.average_rewards(self.goal)  # Aktualisiert die Belohnungen und prüft die Abbruchbedingung
-        n = int(len(sorted_agents) * 0.1)  # Bestimmt die Anzahl der Top 10%
-        top_10 = sorted_agents[:n]  # Selektiert die besten 10%
+        self.average_rewards(self.goal)  # Updates the rewards and checks the termination condition
+        n = int(len(sorted_agents) * 0.1)  # Determines the number of top 10%
+        top_10 = sorted_agents[:n]  # Selects the best 10%
         new_population = []
         for idx in range(self.population_size):
-            random_first_parent = top_10[random.randrange(n)] # Wählt zufällig den ersten Elternteil
-            random_second_parent = top_10[random.randrange(n)] # Wählt zufällig den zweiten Elternteil
-            child = self.crossover(random_first_parent, random_second_parent)  # Erzeugt ein Kind durch Crossover
-            child = self.mutation(child)  # Wendet Mutation auf das Kind an
-            new_population.append(child)  # Fügt das Kind zur neuen Bevölkerung hinzu
-        self.population = new_population  # Aktualisiert die Bevölkerung
-        self.generation_number += 1  # Erhöht die Generationenzahl
+            random_first_parent = top_10[random.randrange(n)] # Randomly chooses the first parent
+            random_second_parent = top_10[random.randrange(n)] # Randomly chooses the second parent
+            child = self.crossover(random_first_parent, random_second_parent)  # Creates a child through crossover
+            child = self.mutation(child)  # Applies mutation to the child
+            new_population.append(child)  # Adds the child to the new population
+        self.population = new_population  # Updates the population
+        self.generation_number += 1  # Increases the number of generations
 
     def average_rewards(self, threshold):
-        # Methode zur Berechnung der durchschnittlichen Belohnung und Überprüfung der Abbruchbedingung
+        # Method for calculating the average reward and checking the termination condition
         rewards = sum(map(lambda agent: agent.reward, self.population))
         average_reward = rewards / len(self.population)
         self.average_reward.append(average_reward)
-        if average_reward > threshold:  # Überprüft, ob die durchschnittliche Belohnung das Ziel überschritten hat
-            self.stop = True  # Setzt das Abbruchflag
-            self.force_rewards()  # Schreibt die Belohnungen in eine Datei
+        if average_reward > threshold:  # Checks whether the average reward has exceeded the target
+            self.stop = True  # Sets the cancel flag
+            self.force_rewards()  # Write the rewards to a file
         print("rewards:", self.average_reward[-1])
 
     def force_rewards(self):
-        # Methode zum Schreiben der durchschnittlichen Belohnungen in eine Datei
+        # Method for writing the average rewards to a file
         with open("rewards.txt", "w") as file:
             for line in self.average_reward:
-                file.write(str(line) + "\n")  # Schreibt jede Belohnung in die Datei
+                file.write(str(line) + "\n")  # Writes each reward to the file
 
     def crossover(self, first_partent, second_parent):
-        # Methode zur Durchführung eines Crossovers zwischen zwei Agenten
-        child = ag()  # Erstellt einen neuen Agenten (Kind)
-        parents = [first_partent, second_parent]  # Definiert die Elternteile
+        # Method for performing a crossover between two agents
+        child = ag()  # Creates a new agent (child)
+        parents = [first_partent, second_parent]  # Defines the parents
         for idx in range(len(child.brain.weights)):
-            matrix = child.brain.weights[idx]  # Zugriff auf die Gewichtsmatrix des Kindes
+            matrix = child.brain.weights[idx]  # Access to the child's weight matrix
             for i in range(matrix.shape[0]):
                 for j in range(matrix.shape[1]):
-                    parent = parents[random.randrange(2)]  # Wählt zufällig einen Elternteil
-                    parent_value = parent.brain.weights[idx][i, j]  # Holt das entsprechende Gewicht
-                    matrix[i, j] = parent_value  # Setzt das Gewicht des Elternteils
-        return child  # Gibt das Kind zurück
+                    parent = parents[random.randrange(2)]  # Chooses a parent at random
+                    parent_value = parent.brain.weights[idx][i, j]  # Get the appropriate weight
+                    matrix[i, j] = parent_value  # Sets the weight of the parent
+        return child  # Returns the child
 
     def checkpoint(self):
-        # Methode zum Speichern der aktuellen Bevölkerung in einer Datei
+        # Method for saving the current population in a file
         with open("checkpoint008_v2.pickle","wb") as file:
-            pickle.dump(self.population, file)  # Schreibt die Bevölkerung in die Datei
+            pickle.dump(self.population, file)  # Writes the population to the file

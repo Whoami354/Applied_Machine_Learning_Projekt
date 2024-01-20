@@ -3,44 +3,45 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Laden und Plotten der Belohnungen aus einer Datei
+# Loading and plotting rewards from a file
 with open("150_008_1200.txt", "r") as reward_file:
     rewards = reward_file.readlines()
     y_values = []
     for reward in rewards:
-        # Konvertiert jede Belohnung in eine Fließkommazahl, rundet auf drei Dezimalstellen ab
+        # Converts each reward into a floating point number, rounds down to three decimal places
         y_values.append(np.round(float(reward), decimals=3))
-    x_values = range(len(rewards))  # Erstellt eine Liste von x-Werten entsprechend der Anzahl der Belohnungen
+    x_values = range(len(rewards))  # Creates a list of x-values according to the number of rewards
     plt.xlabel("Generations")
     plt.ylabel("Rewards")
-    plt.plot(x_values, y_values, "-")  # Plotte die Belohnungen als Linie
+    plt.plot(x_values, y_values, "-")  # Plot the rewards as a line
     plt.show()
 counter = 0
 env = gym.make("LunarLander-v2", render_mode='human')
 
-# Laden der Population aus einer Pickle-Datei
+# Loading the population from a pickle file
 with open("checkpoint008.pickle", "rb") as file:
-    population = pickle.load(file)  # Lädt die Population
-    population_size = len(population)  # Bestimmt die Größe der Population
+    population = pickle.load(file)  # Loads the population
+    population_size = len(population)  # Determines the size of the population
 
-# Startet die Haupt-Simulationschleife
+# Starts the main simulation loop
 while True:
-    # Durchlaufen der gesamten Population der Agenten
+    # Iterate through the entire population of agents
     for idx in range(population_size):
-        # Auswählen des aktuellen Agenten aus der Population
+        # Selecting the current agent from the population
         agent = population[idx]
-        # Setzt die Umgebung zurück und erhält die erste Beobachtung
+        # Resets the environment and receives the first observation
         observation, info = env.reset()
-        # Simuliert bis zu 1000 Schritte
+        # Simulates up to 1000 steps
         for _ in range(1000):
-            # Bestimmt die Aktion basierend auf der Agentenrichtlinie
+            # Determines the action based on the agent policy
             action = np.argmax(agent.execute_action(observation))
-            # Führt die Aktion aus und erhält neue Zustände
+            # Executes the action and receives new states
             observation, reward, terminated, truncated, info = env.step(action)
-            # Aktualisiert die Belohnung des Agenten
+            # Updates the agent's reward
             agent.reward = reward
-            # Beenden der Episode, wenn das Spiel vorbei ist (entweder erfolgreich gelandet oder abgestürzt)
+            # End the episode when the game is over (either successfully landed or crashed)
             if terminated or truncated:
                 break
+        # Count up the number of rewards and print them out
         counter += 1
         print(f"Reward {counter}: {agent.reward}")
