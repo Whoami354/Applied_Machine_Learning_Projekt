@@ -17,14 +17,14 @@ with open("150_008_1200.txt", "r") as reward_file:
     plt.show()
 counter = 0
 env = gym.make("LunarLander-v2", render_mode='human')
-
+running = True
 # Loading the population from a pickle file
 with open("checkpoint008.pickle", "rb") as file:
     population = pickle.load(file)  # Loads the population
     population_size = len(population)  # Determines the size of the population
 
 # Starts the main simulation loop
-while True:
+while running:
     # Iterate through the entire population of agents
     for idx in range(population_size):
         # Selecting the current agent from the population
@@ -41,7 +41,7 @@ while True:
             agent.reward = reward
             # End the episode when the game is over (either successfully landed or crashed)
             if terminated or truncated:
-                break
+                running = False
         # Count up the number of rewards and print them out
         counter += 1
         print(f"Reward {counter}: {agent.reward}")

@@ -4,8 +4,9 @@ import numpy as np
 
 env = gym.make("LunarLander-v2")
 ga = GA()
+running = True
 # Start an endless loop for training
-while True:
+while running:
     # Iterate through the entire population of agents
     for idx in range(ga.population_size):
         # Selecting the current agent from the population
@@ -31,6 +32,6 @@ while True:
     ga.force_rewards()
     # Check whether the training criterion has been reached and end the training
     if ga.stop:
-        break
+        running = False
 # Close the environment when training is finished
 env.close()
