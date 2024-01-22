@@ -43,7 +43,7 @@ while running:
             agent.reward = reward
             # End the episode when the game is over (either successfully landed or crashed)
             if terminated or truncated:
-                running = False
+                break
         # Count up the number of rewards and print them out
         counter += 1
         print(f"Reward {counter}: {agent.reward}")
