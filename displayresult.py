@@ -15,9 +15,11 @@ with open("150_008_1200.txt", "r") as reward_file:
     plt.ylabel("Rewards")
     plt.plot(x_values, y_values, "-")  # Plot the rewards as a line
     plt.show()
+
 counter = 0
 env = gym.make("LunarLander-v2", render_mode='human')
 running = True
+
 # Loading the population from a pickle file
 with open("checkpoint008.pickle", "rb") as file:
     population = pickle.load(file)  # Loads the population

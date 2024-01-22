@@ -5,6 +5,7 @@ import numpy as np
 env = gym.make("LunarLander-v2")
 ga = GA()
 running = True
+
 # Start an endless loop for training
 while running:
     # Iterate through the entire population of agents
