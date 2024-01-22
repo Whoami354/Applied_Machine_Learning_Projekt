@@ -5,7 +5,7 @@ class Agent:
     def __init__(self):
         # The neural network has 8 input neurons and 4 output neurons
         """
-        8 input eurons:
+        8 input Neurons:
         X-distance from target
         Y-distance from target
         X-speed
