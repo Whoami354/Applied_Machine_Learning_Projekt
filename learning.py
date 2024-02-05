@@ -21,7 +21,7 @@ while running:
             # Perform the action in the environment and receive the new status and reward
             observation, reward, terminated, truncated, info = env.step(action)
             # Updating the agent's reward
-            agent.reward = reward
+            agent.reward += reward
             # End the episode when the game is over (either successfully landed or crashed)
             if terminated or truncated:
                 break
