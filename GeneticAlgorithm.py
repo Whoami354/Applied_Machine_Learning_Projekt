@@ -8,7 +8,7 @@ import numpy as np
 class GA:
     def __init__(self):
         # Initialization of the properties of the genetic algorithm
-        self.goal = 200  # Termination condition
+        self.goal = 150  # Termination condition
         self.mutation_rate = 0.08  # Mutation probability
         self.population = []  # List of agents (population)
         self.average_reward = []  # List of average rewards
