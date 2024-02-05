@@ -14,7 +14,7 @@
 > if you want to see the result of the learning or the pretrained model, run "displayresult.py" in Pycharm or in Console (python displayresult.py) \
 
 ## How it was trained
-> It is a population of Agents And they were trained using Neuroevolution. \
+> It is a population of Agents and they were trained using Neuroevolution. \
 > The results of training will be saved in the *.pickle file. \
 > My best results are saved in "checkpoint008.pickle" \
 > The rewards of a Generation are stored in the *.txt files \
